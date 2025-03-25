@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MyWPFApp.ViewModels
+namespace ActionNow.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

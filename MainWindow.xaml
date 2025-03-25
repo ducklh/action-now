@@ -4,9 +4,59 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActionNow"
+        xmlns:viewmodels="clr-namespace:ActionNow.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="User Management" Height="450" Width="800">
+    
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
 
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Grid.Column="0" 
+                  ItemsSource="{Binding Users}" 
+                  SelectedItem="{Binding SelectedUser}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Margin="0,0,10,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Name:"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <TextBlock Text="Email:"/>
+            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,10"/>
+
+            <TextBlock Text="Age:"/>
+            <TextBox Text="{Binding Age, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Add" 
+                        Command="{Binding AddCommand}" 
+                        Width="80" 
+                        Margin="0,0,10,0"/>
+                <Button Content="Update" 
+                        Command="{Binding UpdateCommand}" 
+                        Width="80" 
+                        Margin="0,0,10,0"/>
+                <Button Content="Delete" 
+                        Command="{Binding DeleteCommand}" 
+                        Width="80"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
